@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      args:
+        CONFIGURATION: Release
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://*:5000
+      - CONNECTION_STRINGS__SQLDatabase=${SQLDatabase}
+    ports:
+      - 5000:5000
+    volumes:
+      - ../.docker/https:/https:ro

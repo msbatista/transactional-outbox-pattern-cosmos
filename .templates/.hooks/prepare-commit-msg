@@ -1,0 +1,12 @@
+#! /bin/bash
+
+branchName=`git rev-parse --abbrev-ref HEAD`
+
+resource=$(echo $branchName | sed -nE 's,([a-z]+)/.+,\1,p')
+devopsId=$(echo $branchName | sed -nE 's,[a-z]+/([0-9]+)-.+,\1,p')
+
+# only prepare commit message if pattern matched and devopsId was found
+if [[ ! -z $devopsId && ! -z $resource ]]; then
+    # $1 is the name of the file containing the commit message
+    echo -e "[$resource] ""$(cat $1)"" (#$devopsId)" > "$1"
+fi
