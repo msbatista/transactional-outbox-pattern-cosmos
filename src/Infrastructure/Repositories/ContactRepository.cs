@@ -70,7 +70,6 @@ public class ContactRepository : IContactRepository
             new QueryRequestOptions { MaxItemCount = pageSize }
         );
 
-
         try
         {
             if (!queryResultSetIterator.HasMoreResults)
